@@ -50,5 +50,5 @@ Route::resource('sites', 'siteController');
 Route::resource('objets', 'objetController');
 Route::resource('robots', 'robotController');
 Route::resource('notifications', 'notificationController');
-Route::resource('produits_meagers', 'produits_menagerController');
+Route::resource('produits_menagers', 'produits_menagerController');
 Route::resource('outils_menagers', 'outils_menagerController');
