@@ -40,4 +40,15 @@ Route::group(['middleware' => 'guest:api'], function () {
 });
 
 Route::get('client/afficherInformations', 'clientController@afficherInformations')->name('client.afficherInformations');
-Route::resource('client', 'clientController');
+Route::resource('clients', 'clientController');
+Route::resource('users', 'userController');
+Route::resource('superAdmins', 'superAdminController');
+Route::resource('admins', 'adminController');
+Route::resource('commandes', 'commandeController');
+Route::resource('campus', 'campusController');
+Route::resource('sites', 'siteController');
+Route::resource('objets', 'objetController');
+Route::resource('robots', 'robotController');
+Route::resource('notifications', 'notificationController');
+Route::resource('produits_meagers', 'produits_menagerController');
+Route::resource('outils_menagers', 'outils_menagerController');
