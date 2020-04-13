@@ -24,7 +24,13 @@ class robot extends FormRequest
     public function rules()
     {
         return [
-            //
+            'objetId' => ['required', 'integer'], 'prix' => ['required', 'integer'],
+            'produit_menager' => ['required', 'integer'],
+            'outils_menager' => ['required', 'integer'],
+            'quantite_produit_restant' => ['required', 'integer'],
+            'quantite_outil_restant' => ['required', 'integer'],
+            'name' => ['require', 'string', 'max:100'],
+            'dernier_lavage' => ['require'],
         ];
     }
 }

@@ -24,7 +24,10 @@ class notification extends FormRequest
     public function rules()
     {
         return [
-            //
+            'clientId' => ['required', 'integer'],
+            'description' => ['required', 'string', 'max:500'],
+            'type' => ['required', 'string', 'max:100'],
+            'date' => ['required'],
         ];
     }
 }

@@ -24,7 +24,9 @@ class objet extends FormRequest
     public function rules()
     {
         return [
-            //
+            'siteId' => ['required', 'integer'],
+            'name' => ['require', 'string', 'max:100'],
+            'dernier_lavage' => ['require'],
         ];
     }
 }

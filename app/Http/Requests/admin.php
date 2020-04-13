@@ -24,7 +24,9 @@ class admin extends FormRequest
     public function rules()
     {
         return [
-            //
+            'pseudo' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'max:100'],
+            'password' => ['required', 'string', 'max:100'],
         ];
     }
 }

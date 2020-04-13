@@ -24,7 +24,8 @@ class produits_menager extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['require', 'string', 'max:100'],
+            'prix' => ['required', 'integer'],
         ];
     }
 }
