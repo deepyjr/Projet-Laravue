@@ -1,13 +1,8 @@
 <template>
   <card :title="$t('home')">
     {{ $t('you_are_logged_in') }}
-    <p>Voici les infos du client envoyées par le backend</p>
-    <div>{{ users}}</div>
-    <p>Formulaire pour modifier votre nom(name dans la dbb)</p>
-    <form @submit.prevent="submitName">
-      <input type="text" v-model="newName" />
-      <button type="submit">Envoyer</button>
-    </form>
+    <p>test button</p>
+    <router-link :to="{ name: 'campus' }">{{ $t('campus') }}</router-link>
   </card>
 </template>
 
@@ -29,11 +24,7 @@ export default {
       });
     }
   },
-  mounted() {
-    axios.get("/api/client").then(res => {
-      this.users = res.data;
-    });
-  },
+  mounted() {},
   metaInfo() {
     return { title: this.$t("home") };
   }

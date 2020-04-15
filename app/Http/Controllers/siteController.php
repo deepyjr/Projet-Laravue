@@ -3,9 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\site;
+use App\Http\Requests\site as siteRequest;
 
 class siteController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByCampusId($campusId)
+    {
+        $sites = DB::table('sites')
+            ->select(DB::raw('*'))
+            ->where('campusId', '=', $campusId)
+            ->get();
+        return response()->json($sites);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +51,11 @@ class siteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $site = new Site();
+        $site->campusId = request('campusId');
+        $site->name = request('name');
+        $site->save();
+        return response(200);
     }
 
     /**
@@ -45,7 +66,11 @@ class siteController extends Controller
      */
     public function show($id)
     {
-        //
+        $site = DB::table('sites')
+            ->select(DB::raw('*'))
+            ->where('id', '=', $id)
+            ->get();
+        return response()->json($site);
     }
 
     /**
@@ -68,7 +93,10 @@ class siteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $site = Site::find(request('siteId'));
+        $site->name = request('name');
+        $site->save();
+        return response(200);
     }
 
     /**
@@ -79,6 +107,7 @@ class siteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::delete('delete from sites where id=' . $id);
+        return response(200);
     }
 }
