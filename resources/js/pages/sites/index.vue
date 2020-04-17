@@ -44,7 +44,7 @@
               </td>
               <td>
                 <router-link
-                  :to="{ name: 'sites', params: { id: site.id, campusId: campusId } }"
+                  :to="{ name: 'objets', params: { id: site.id} }"
                   class="btn btn-primary"
                 >Voir les objets</router-link>
               </td>

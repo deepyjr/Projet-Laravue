@@ -37,5 +37,15 @@ export default [
   { path: '/sites/create', name: 'createSites', component: page('sites/createSite.vue') },
   { path: '/sites/:id/delete', name: 'deleteSites', component: page('sites/deleteSite.vue') },
   { path: '/sites/:id/edit', name: 'editSites', component: page('sites/editSite.vue') },
+  ////////////////////////////////////////////////////////////////////////////
+  { path: '/objets', name: 'objets', component: page('objets/index.vue') },
+  { path: '/objets/create', name: 'createObjets', component: page('objets/createObjet.vue') },
+  { path: '/objets/:id/delete', name: 'deleteObjets', component: page('objets/deleteObjet.vue') },
+  { path: '/objets/:id/edit', name: 'editObjets', component: page('objets/editObjet.vue') },
+  { path: '/objets/:id/progammerLavage', name: 'progLavageObjets', component: page('objets/progLavageObjet.vue') },
+  ////////////////////////////////////////////////////////////////////////////
+  { path: '/commandes', name: 'commandes', component: page('commandes/index.vue') },
+  { path: '/commandes/:id/delete', name: 'deleteCommandes', component: page('commandes/deleteCommande.vue') },
+  { path: '/commandes/:id', name: 'showCommandes', component: page('commandes/showCommande.vue') },
 ]
 

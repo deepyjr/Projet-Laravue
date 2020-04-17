@@ -24,13 +24,12 @@ class commande extends FormRequest
     public function rules()
     {
         return [
-            'clientId' => ['required', 'integer'],
-            'objetId' => ['required', 'integer'],
+            'clientId' => ['required'],
+            'objetId' => ['required'],
             'status' => ['required', 'string', 'max:100'],
             'date_commande' => ['required'],
             'date_debut' => ['required'],
             'date_fin' => ['required'],
-
         ];
     }
 }

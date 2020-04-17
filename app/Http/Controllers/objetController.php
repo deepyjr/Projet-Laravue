@@ -3,9 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\objet;
+use App\commande;
+use DB;
+use App\Http\Requests\objet as objetRequest;
 
 class objetController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexBySiteId($siteId)
+    {
+        $objets = DB::table('objets')
+            ->select(DB::raw('*'))
+            ->where('siteId', '=', $siteId)
+            ->get();
+
+        foreach ($objets as $objet) {
+            $objet->commande = Commande::where([
+                ['objetId', '=', $objet->id],
+                ['status', '!=', 'Termine'],
+                ['status', '!=', 'Commande'],
+            ])
+                ->count();
+        }
+        return response()->json($objets);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +61,12 @@ class objetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $objet = new Objet();
+        $objet->siteId = request('siteId');
+        $objet->name = request('name');
+        $objet->dernier_lavage = date("Y-m-d H:i:s"); //equivalent de now() en sql
+        $objet->save();
+        return response(200);
     }
 
     /**
@@ -45,7 +77,11 @@ class objetController extends Controller
      */
     public function show($id)
     {
-        //
+        $objet = DB::table('objets')
+            ->select(DB::raw('*'))
+            ->where('id', '=', $id)
+            ->get();
+        return response()->json($objet);
     }
 
     /**
@@ -68,7 +104,10 @@ class objetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $objet = Objet::find(request('objetId'));
+        $objet->name = request('name');
+        $objet->save();
+        return response(200);
     }
 
     /**
@@ -79,6 +118,7 @@ class objetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::delete('delete from objets where id=' . $id);
+        return response(200);
     }
 }

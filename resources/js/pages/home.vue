@@ -1,8 +1,13 @@
 <template>
   <card :title="$t('home')">
     {{ $t('you_are_logged_in') }}
-    <p>test button</p>
-    <router-link :to="{ name: 'campus' }">{{ $t('campus') }}</router-link>
+    <br />
+    <router-link class="btn btn-primary" :to="{ name: 'campus' }">{{ $t('campus') }}</router-link>
+    <router-link
+      class="btn btn-primary"
+      :to="{ name: 'commandes' , params: { clientId: 3 } }"
+    >{{ $t(' Mes commandes') }}</router-link>
+    <!-- TODO changer le clientId-->
   </card>
 </template>
 
@@ -11,19 +16,9 @@ export default {
   middleware: "auth",
   resource: null,
   data() {
-    return {
-      users: [],
-      newName: ""
-    };
+    return {};
   },
-  methods: {
-    submitName() {
-      console.log("posted");
-      axios.post("/api/client", {
-        content: this.newName
-      });
-    }
-  },
+  methods: {},
   mounted() {},
   metaInfo() {
     return { title: this.$t("home") };
