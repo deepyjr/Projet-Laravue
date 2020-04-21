@@ -38,3 +38,21 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 });
+
+Route::get('client/afficherInformations', 'clientController@afficherInformations')->name('client.afficherInformations');
+Route::resource('clients', 'clientController');
+Route::resource('users', 'userController');
+Route::resource('superAdmins', 'superAdminController');
+Route::resource('admins', 'adminController');
+Route::get('commandes/indexCommandesByClientId/{clientId}', 'commandeController@indexCommandesByClientId')->name('commandes.indexCommandesByClientId');
+Route::resource('commandes', 'commandeController');
+Route::get('campus/indexByClientId/{clientId}', 'campusController@indexByClientId')->name('campus.indexByClientId');
+Route::resource('campus', 'campusController');
+Route::get('sites/indexByCampusId/{campusId}', 'siteController@indexByCampusId')->name('site.indexByCampusId');
+Route::resource('sites', 'siteController');
+Route::get('objets/indexBySiteId/{siteId}', 'objetController@indexBySiteId')->name('objet.indexBySiteId');
+Route::resource('objets', 'objetController');
+Route::resource('robots', 'robotController');
+Route::resource('notifications', 'notificationController');
+Route::resource('produits_menagers', 'produits_menagerController');
+Route::resource('outils_menagers', 'outils_menagerController');
