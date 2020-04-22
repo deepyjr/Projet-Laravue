@@ -1,5 +1,5 @@
 <template>
-  <CRow>
+  <CRow class="mb-5">
     <CCol sm="6" lg="3">
       <CWidgetDropdown color="primary" header="9.823" text="Members online">
         <template #default>

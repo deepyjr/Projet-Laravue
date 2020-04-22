@@ -64,3 +64,18 @@ export default {
   }
 }
 </script>
+<style >
+body{
+    width: 100%;  
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    background: rgb(89,190,233);
+    background: -moz-linear-gradient(45deg, rgba(89,190,233,1) 0%, rgba(0,97,201,1) 100%);
+    background: -webkit-linear-gradient(45deg, rgba(89,190,233,1) 0%, rgba(0,97,201,1) 100%);
+    background: linear-gradient(45deg, rgba(89,190,233,1) 0%, rgba(0,97,201,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#59bee9",endColorstr="#0061c9",GradientType=1);
+}
+</style>

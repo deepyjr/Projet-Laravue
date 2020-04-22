@@ -7,12 +7,15 @@
       class="btn btn-primary"
       :to="{ name: 'commandes' , params: { clientId: 3 } }"
     >{{ $t(' Mes commandes') }}</router-link>
+
     <!-- TODO changer le clientId-->
   </card>
 </template>
 
 <script>
+
 export default {
+
   middleware: "auth",
   resource: null,
   data() {
