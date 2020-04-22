@@ -20,17 +20,20 @@
 
         <ul class="navbar-nav ml-auto">
           <!-- Authenticated -->
-            <router-link class="mr-3 mt-2 navbar-item" :to="{ name: 'campus' }">{{ $t('Campus') }}</router-link>
+          <div v-if="user" class="mt-2">
+            <router-link class="mr-3 mt-4 navbar-item" :to="{ name: 'campus' }">{{ $t('Campus') }}</router-link>
 
-            <router-link :to="{ name: 'dashboard' }" class="mr-3 mt-2 navbar-item" active-class="active">
+            <router-link :to="{ name: 'dashboard' }" class="mr-3 mt-4 navbar-item" active-class="active">
               {{ $t('Dashboard') }}
             </router-link>
 
             <router-link
-              class="mr-3 mt-2 navbar-item"
+              class="mr-3 mt-4 pt-3 navbar-item"
               :to="{ name: 'commandes' , params: { clientId: 3 } }"
             >{{ $t('Mes commandes') }}</router-link>
 
+          </div>
+            
           <li v-if="user" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
