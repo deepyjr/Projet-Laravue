@@ -63,6 +63,15 @@ class dashbordController extends Controller
      */
     private function getRobotsStates()
     {
+        $sqlReq = "SELECT * FROM robots WHERE objetId IN (
+            SELECT id FROM objets WHERE siteId IN (
+                SELECT id FROM sites WHERE campusId IN (
+                    SELECT id FROM campuses WHERE clientId = $this->clientId
+                )
+            )
+        )";
+        $result = DB::select($sqlReq);
+        $this->data->robotsStates = $result;
     }
 
     /**
@@ -79,6 +88,26 @@ class dashbordController extends Controller
      */
     private function getNbOfConnectRobotsById()
     {
+        $sqlReq = "SELECT COUNT(*) AS nbRobots FROM robots WHERE objetId IN (
+            SELECT id FROM objets WHERE siteId IN (
+                SELECT id FROM sites WHERE campusId IN (
+                    SELECT id FROM campuses WHERE clientId = $this->clientId
+                )
+            )
+        )";
+
+        $sqlReq2 = "SELECT COUNT(*) AS nbRobotsWithProblems FROM robots WHERE objetId IN (
+            SELECT id FROM objets WHERE siteId IN (
+                SELECT id FROM sites WHERE campusId IN (
+                    SELECT id FROM campuses WHERE clientId = $this->clientId
+                )
+            )
+        ) AND LENGTH(erreurs_internes) > 0";
+
+        $result = DB::select($sqlReq);
+        $result2 = DB::select($sqlReq2);
+        $this->data->nbRobots = $result[0]->nbRobots;
+        $this->data->nbRobotsWithProblems = $result2[0]->nbRobotsWithProblems;
     }
 
     /**
@@ -91,6 +120,8 @@ class dashbordController extends Controller
         $this->getNbOrderById();
         $this->getFuturOrdersById();
         $this->getWeekNbWash();
+        $this->getRobotsStates();
+        $this->getNbOfConnectRobotsById();
         return response()->json($this->data);
     }
 }

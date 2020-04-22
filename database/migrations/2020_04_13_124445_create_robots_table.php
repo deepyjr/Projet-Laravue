@@ -19,9 +19,10 @@ class CreateRobotsTable extends Migration
             $table->string('name');
             $table->foreignId('produit_menager');
             $table->foreignId('outil_menager');
+            $table->string('erreurs_internes');
             $table->integer('quantite_produit_restant');
             $table->integer('quantite_outil_restant');
-            $table->dateTime('dernier_lavage', 0);
+            $table->dateTime('dernier_lavage', 0)->nullable();;
             $table->timestamps();
         });
     }

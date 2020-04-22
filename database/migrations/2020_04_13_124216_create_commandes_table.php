@@ -18,9 +18,9 @@ class CreateCommandesTable extends Migration
             $table->foreignId('clientId');
             $table->foreignId('objetId');
             $table->string('status');
-            $table->dateTime('date_commande', 0)->default(NULL);
-            $table->dateTime('date_debut', 0)->default(NULL);
-            $table->dateTime('date_fin', 0)->default(NULL);
+            $table->dateTime('date_commande', 0)->nullable();
+            $table->dateTime('date_debut', 0)->nullable();
+            $table->dateTime('date_fin', 0)->nullable();
             $table->timestamps();
         });
     }

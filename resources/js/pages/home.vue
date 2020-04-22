@@ -14,15 +14,13 @@
 </template>
 
 <script>
-
 export default {
-
   middleware: "auth",
   resource: null,
   data() {
     return {
       dashbord: [],
-      clientId: 3
+      clientId: 1
     };
   },
   methods: {},
