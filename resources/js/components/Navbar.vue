@@ -1,24 +1,36 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
-      <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand">
-        {{ appName }}
-      </router-link>
+      <img class="logo-nav-bar" src="logo.png" alt="">
+      <!-- <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand">
+      {{ $t('Clean-It')}}
+      </router-link> -->
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
         <span class="navbar-toggler-icon" />
       </button>
 
       <div id="navbarToggler" class="collapse navbar-collapse">
         <ul class="navbar-nav">
           <locale-dropdown />
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
-          </li> -->
-        </ul>
+          </li>
+        </ul> -->
 
         <ul class="navbar-nav ml-auto">
           <!-- Authenticated -->
+            <router-link class="mr-3 mt-2 navbar-item" :to="{ name: 'campus' }">{{ $t('Campus') }}</router-link>
+
+            <router-link :to="{ name: 'dashboard' }" class="mr-3 mt-2 navbar-item" active-class="active">
+              {{ $t('Dashboard') }}
+            </router-link>
+
+            <router-link
+              class="mr-3 mt-2 navbar-item"
+              :to="{ name: 'commandes' , params: { clientId: 3 } }"
+            >{{ $t('Mes commandes') }}</router-link>
+
           <li v-if="user" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -46,11 +58,7 @@
                 {{ $t('login') }}
               </router-link>
             </li>
-           <li class="nav-item">
-              <router-link :to="{ name: 'dashboard' }" class="nav-link" active-class="active">
-                dashboard
-              </router-link>
-            </li>
+           
             <li class="nav-item">
               <router-link :to="{ name: 'register' }" class="nav-link" active-class="active">
                 {{ $t('register') }}
@@ -59,7 +67,7 @@
           </template>
         </ul>
       </div>
-    </div>
+    <!-- </div> -->
   </nav>
 </template>
 
@@ -97,5 +105,11 @@ export default {
   width: 2rem;
   height: 2rem;
   margin: -.375rem 0;
+}
+.navbar-item{
+  text-decoration: none; 
+}
+.logo-nav-bar{
+  height: 70px;
 }
 </style>
