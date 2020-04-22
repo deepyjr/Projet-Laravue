@@ -9,6 +9,7 @@
     >{{ $t(' Mes commandes') }}</router-link>
 
     <!-- TODO changer le clientId-->
+    <p>{{dashbord}}</p>
   </card>
 </template>
 
@@ -19,10 +20,18 @@ export default {
   middleware: "auth",
   resource: null,
   data() {
-    return {};
+    return {
+      dashbord: [],
+      clientId: 3
+    };
   },
   methods: {},
-  mounted() {},
+  mounted() {
+    axios.get("/api/dashbord/getDataForDashbord/" + this.clientId).then(res => {
+      this.dashbord = res.data;
+      console.log(this.dashbord);
+    });
+  },
   metaInfo() {
     return { title: this.$t("home") };
   }
