@@ -79,7 +79,7 @@ class dashbordController extends Controller
      */
     private function getFuturOrdersById()
     {
-        $sqlReq = "SELECT TOP 3 * FROM `commandes` WHERE date(date_debut) > date(now()) AND clientId = $this->clientId";
+        $sqlReq = "SELECT * FROM `commandes` WHERE date(date_debut) > date(now()) AND clientId = $this->clientId LIMIT 3";
         $this->data->futurCommandes = DB::select($sqlReq);
     }
 
