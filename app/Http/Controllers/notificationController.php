@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\notification;
+use App\objet;
+use App\campus;
+use App\site;
 
 class notificationController extends Controller
 {
@@ -32,9 +36,18 @@ class notificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($objetId, $clientId)
     {
-        //
+        $objet = Objet::find($objetId);
+        $site = Site::find($objet->siteId);
+        $campus = Campus::find($site->campusId);
+        $nom_lavage = $campus->name . '/' . $site->name . '/' . $objet->name;
+        $notification = new notification();
+        $notification->clientId = $clientId;
+        $notification->description = "Le lavage $nom_lavage a été commandé ";
+        $notification->type = "Lavage";
+        $notification->date = date("Y-m-d H:i:s");
+        $notification->save();
     }
 
     /**
@@ -79,6 +92,7 @@ class notificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::delete('delete from notifications where id=' . $id);
+        return response(200);
     }
 }

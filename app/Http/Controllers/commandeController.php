@@ -9,6 +9,7 @@ use App\objet;
 use App\campus;
 use App\site;
 use App\Http\Requests\commande as commandeRequest;
+use App\Http\Controllers\notificationController as notificationController;
 
 class commandeController extends Controller
 {
@@ -68,6 +69,9 @@ class commandeController extends Controller
         $commande->date_commande = date("Y-m-d H:i:s");
         $commande->date_debut = request('date_debut');
         $commande->save();
+
+        $nofificationController = new notificationController();
+        $nofificationController->store(request('objetId'), 3);
         return response(200);
     }
 

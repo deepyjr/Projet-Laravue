@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\objet;
 use App\commande;
 use DB;
+use App\robot;
 use App\Http\Requests\objet as objetRequest;
 
 class objetController extends Controller
@@ -66,6 +67,8 @@ class objetController extends Controller
         $objet->name = request('name');
         $objet->dernier_lavage = date("Y-m-d H:i:s"); //equivalent de now() en sql
         $objet->save();
+        //On créer le robot correspondant a objet
+        //TODO a faire
         return response(200);
     }
 

@@ -6,7 +6,7 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <p>Êtes-vous sûr de vouloir supprimer ce campus définitivement ?</p>
-        <button class="btn btn-danger" @click="confirmDelete">Supprimer le campus</button>
+        <button class="btn btn-danger" @click="confirmDeleteCampus">Supprimer le campus</button>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@ export default {
     };
   },
   methods: {
-    confirmDelete() {
+    confirmDeleteCampus() {
       axios.delete("/api/campus/" + this.campusId);
     }
   },
