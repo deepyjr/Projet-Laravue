@@ -1,7 +1,7 @@
 <template>
   <CChartBar
     :datasets="defaultDatasets"
-    labels="months"
+    :labels="days"
   />
 </template>
 
@@ -10,17 +10,37 @@ import { CChartBar } from '@coreui/vue-chartjs'
 
 export default {
   name: 'CChartBarExample',
+  data () {
+    return {
+      clientId: 1,
+      tableauData:[],
+      days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi' , 'Samedi', 'Dimanche']
+    }
+  },
+
   components: { CChartBar },
   computed: {
     defaultDatasets () {
       return [
         {
-          label: 'GitHub Commits',
+          label: 'Déclenchement Jour par Jour',
           backgroundColor: '#f87979',
-          data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+          data: this.tableauData
         }
       ]
     }
-  }
+  },
+   mounted() {
+    axios.get("/api/dashbord/getDataForDashbord/" + this.clientId).then(res => {
+      this.tableauData = Object.values(res.data.nbWashWeek);
+      
+      console.log(this.tableauData);
+
+      // for(let i = 0 ; i< this.dashboard.nbWashWeek.length(); i++){
+      //    this.data.push(this.dashboard.nbWashWeek[i])
+      // }
+
+    });
+  },
 }
 </script>
