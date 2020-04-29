@@ -14,7 +14,7 @@ export default {
     return {
       clientId: 1,
       tableauData:[],
-      days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi' , 'Samedi', 'Dimanche']
+      days: ['Dimanche','Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi' , 'Samedi']
     }
   },
 
@@ -24,7 +24,7 @@ export default {
       return [
         {
           label: 'Déclenchement Jour par Jour',
-          backgroundColor: '#f87979',
+          backgroundColor: '#3497DC',
           data: this.tableauData
         }
       ]
