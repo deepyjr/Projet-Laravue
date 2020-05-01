@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       objets: [],
-      userId: "1", //TODO Changer le userId
+      userId: 0,
       siteId: 0
     };
   },
@@ -111,6 +111,9 @@ export default {
   },
   created() {
     this.siteId = this.$route.params.id;
+    axios.get("/api/user/getCurrentUserInformation").then(res => {
+      this.userId = res.data.user.id;
+    });
   },
   metaInfo() {
     return { title: this.$t("Objets") };

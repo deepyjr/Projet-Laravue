@@ -44,7 +44,8 @@ export default {
       name: "",
       adress: "",
       campus: [],
-      campusId: 1
+      campusId: 1,
+      clientId: 0
     };
   },
   methods: {
@@ -52,9 +53,14 @@ export default {
       axios.post("/api/campus", {
         name: this.name,
         adress: this.adress,
-        clientId: 1 //TODO cahnger clientId
+        clientId: this.clientId
       });
     }
+  },
+  mounted() {
+    axios.get("/api/user/getCurrentUserInformation").then(res => {
+      this.clientId = res.data.user.id;
+    });
   },
   metaInfo() {
     return { title: this.$t("Campus") };

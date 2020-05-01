@@ -38,12 +38,15 @@ export default {
       axios.post("/api/objets", {
         name: this.name,
         siteId: this.siteId,
-        clientId: 1 //TODO cahnger clientId
+        clientId: 0
       });
     }
   },
   created() {
     this.siteId = this.$route.params.siteId;
+    axios.get("/api/user/getCurrentUserInformation").then(res => {
+      this.clientId = res.data.user.id;
+    });
   },
   metaInfo() {
     return { title: this.$t("Objets") };

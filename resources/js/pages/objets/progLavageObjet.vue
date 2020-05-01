@@ -43,14 +43,14 @@ export default {
       heure_debut: "",
       objetId: 0,
       siteId: 0,
-      clientId: 0 //TODO changer clientId
+      clientId: 0
     };
   },
   methods: {
     submitForm() {
       axios.post("/api/commandes", {
         date_debut: this.date_debut + " " + this.heure_debut,
-        clientId: 3, //TODO changer client id
+        clientId: this.clientId,
         objetId: this.objetId,
         status: "Commande"
       });
@@ -59,6 +59,9 @@ export default {
   created() {
     this.siteId = this.$route.params.siteId;
     this.objetId = this.$route.params.id;
+    axios.get("/api/user/getCurrentUserInformation").then(res => {
+      this.clientId = res.data.user.id;
+    });
   },
   metaInfo() {
     return { title: this.$t("Objets") };

@@ -63,13 +63,16 @@ export default {
   data() {
     return {
       campus: [],
-      userId: "1" //TODO Changer le userId
+      userId: 0
     };
   },
   methods: {},
   mounted() {
-    axios.get("/api/campus/indexByClientId/" + this.userId).then(res => {
-      this.campus = res.data;
+    axios.get("/api/user/getCurrentUserInformation").then(res => {
+      this.userId = res.data.user.id;
+      axios.get("/api/campus/indexByClientId/" + this.userId).then(res => {
+        this.campus = res.data;
+      });
     });
   },
   metaInfo() {

@@ -38,12 +38,15 @@ export default {
       axios.post("/api/sites", {
         name: this.name,
         campusId: this.campusId,
-        clientId: 1 //TODO cahnger clientId
+        clientId: 0
       });
     }
   },
   created() {
     this.campusId = this.$route.params.campusId;
+    axios.get("/api/user/getCurrentUserInformation").then(res => {
+      this.clientId = res.data.user.id;
+    });
   },
   metaInfo() {
     return { title: this.$t("Sites") };
