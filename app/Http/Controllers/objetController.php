@@ -67,8 +67,23 @@ class objetController extends Controller
         $objet->name = request('name');
         $objet->dernier_lavage = date("Y-m-d H:i:s"); //equivalent de now() en sql
         $objet->save();
+        //On récupère l'objet qui vient d'etre crée
+        $newObjet = Objet::WHERE([
+            ['name', '=', request('name')],
+            ['siteId', '=', request('siteId')]
+        ])->first();
         //On créer le robot correspondant a objet
-        //TODO a faire
+        $robot = new Robot();
+        $robot->objetId = $newObjet->id;
+        $robot->name = "robot" . $newObjet->name;
+        $robot->produit_menager = 1;
+        $robot->outil_menager = 1;
+        $robot->erreurs_internes = "";
+        $robot->quantite_produit_restant = 10;
+        $robot->quantite_outil_restant = 10;
+        $robot->dernier_lavage = date("Y-m-d H:i:s");
+        $robot->save();
+
         return response(200);
     }
 

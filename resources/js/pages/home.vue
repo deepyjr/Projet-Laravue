@@ -3,12 +3,7 @@
     {{ $t('you_are_logged_in') }}
     <br />
     <router-link class="btn btn-primary" :to="{ name: 'campus' }">{{ $t('campus') }}</router-link>
-    <router-link
-      class="btn btn-primary"
-      :to="{ name: 'commandes' , params: { clientId: 3 } }"
-    >{{ $t(' Mes commandes') }}</router-link>
-
-    <!-- TODO changer le clientId-->
+    <router-link class="btn btn-primary" :to="{ name: 'commandes'}">{{ $t(' Mes commandes') }}</router-link>
     <p>{{dashbord}}</p>
   </card>
 </template>
@@ -20,14 +15,13 @@ export default {
   data() {
     return {
       dashbord: [],
-      clientId: 1
+      clientId: 0
     };
   },
   methods: {},
   mounted() {
-    axios.get("/api/dashbord/getDataForDashbord/" + this.clientId).then(res => {
-      this.dashbord = res.data;
-      console.log(this.dashbord);
+    axios.get("/api/user/getCurrentUserInformation").then(res => {
+      this.clientId = res.data.user.id;
     });
   },
   metaInfo() {

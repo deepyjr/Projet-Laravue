@@ -57,3 +57,4 @@ Route::resource('notifications', 'notificationController');
 Route::resource('produits_menagers', 'produits_menagerController');
 Route::resource('outils_menagers', 'outils_menagerController');
 Route::get('dashbord/getDataForDashbord/{clientId}', 'dashbordController@getDataForDashbord')->name('dashbord.getDataForDashbord');
+Route::get('user/getCurrentUserInformation', 'userController@getCurrentUserInformation')->name('user.getCurrentUserInformation');

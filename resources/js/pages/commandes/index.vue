@@ -47,21 +47,21 @@ export default {
   data() {
     return {
       commandes: [],
-      clientId: 0, //TODO Changer le userId
+      clientId: 0,
       name: "mettre description"
     };
   },
   methods: {},
-  mounted() {
-    axios
-      .get("/api/commandes/indexCommandesByClientId/" + this.clientId)
-      .then(res => {
-        console.log(res.data);
-        this.commandes = res.data;
-      });
-  },
+  mounted() {},
   created() {
-    this.clientId = this.$route.params.clientId;
+    axios.get("/api/user/getCurrentUserInformation").then(res => {
+      this.clientId = res.data.user.id;
+      axios
+        .get("/api/commandes/indexCommandesByClientId/" + this.clientId)
+        .then(res => {
+          this.commandes = res.data;
+        });
+    });
   },
   metaInfo() {
     return { title: this.$t("Commandes") };
