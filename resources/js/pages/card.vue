@@ -1,13 +1,14 @@
 <template>
     <div>
     <CRow>
-      <CCol sm="6">
-        <CCard>
+      <CCol >
+        <CCard class="">
           <CCardHeader>
             {{status}}
           </CCardHeader>
           <CCardBody>
-            Test
+            Crée le {{date_commande}}
+            Commandé pour le {{date_debut}}
           </CCardBody>
         </CCard>
       </CCol>
@@ -18,7 +19,7 @@
 
 <script>
 export default {
-  props:['status'],
+  props:['status','date_debut','date_commande'],
   data(){
     return{
 
@@ -27,3 +28,6 @@ export default {
   
 }
 </script>
+<style >
+
+</style>

@@ -1,8 +1,10 @@
 <template>
+<div class="pb-5">
   <CChartBar
     :datasets="defaultDatasets"
     :labels="days"
   />
+</div>
 </template>
 
 <script>
