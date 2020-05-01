@@ -33,12 +33,6 @@ export default {
    mounted() {
     axios.get("/api/dashbord/getDataForDashbord/" + this.clientId).then(res => {
       this.tableauData = Object.values(res.data.nbWashWeek);
-      
-      console.log(this.tableauData);
-
-      // for(let i = 0 ; i< this.dashboard.nbWashWeek.length(); i++){
-      //    this.data.push(this.dashboard.nbWashWeek[i])
-      // }
 
     });
   },

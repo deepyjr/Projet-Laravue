@@ -1,9 +1,8 @@
 <template>
   <div class="card" :title="$t('createObjet')">
-    <div>
-      <router-link :to="{ name: 'objets' , params: { id: siteId }}" class="btn btn-primary">Retour</router-link>
-    </div>
-    <div class="card" style="width: 18rem;">
+    
+    <div class="container mt-5 mb-5">
+      
       <form @submit.prevent="submitForm">
         <div class="form-group">
           <label for="exampleInputEmail1">Nom de l'objet</label>
@@ -14,11 +13,16 @@
             name="name"
             v-model="name"
             aria-describedby="emailHelp"
-            placeholder="Nom du sites"
+            placeholder="Nom de l'objet"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Créer le nouvel objet</button>
+        <div class="d-flex justify-content-end  mt-2">
+          <router-link :to="{ name: 'objets' , params: { id: siteId }}" class=" btn btn-primary "> <i class="fa-long-arrow-alt-left"></i> Retour</router-link>
+          <button type="submit" class="btn btn-primary ml-3">Créer le nouvel objet</button>
+        </div>
+        
       </form>
+      
     </div>
   </div>
 </template>
@@ -50,3 +54,9 @@ export default {
   }
 };
 </script>
+<style >
+.textRetour{
+  text-decoration: none !important;
+  color: #3497DC !important;
+}
+</style>

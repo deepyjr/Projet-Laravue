@@ -6,7 +6,7 @@
 
 <div class="container-fluid ">
 
-          <div class="mt-2">
+          <div class="mt-4">
             <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
               <h1 class="h3 mb-0 text-gray-800 ">Dashboard</h1>
               <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
@@ -41,7 +41,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Nombre de robots</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashbord.nbRobots}}</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboard.nbRobots}}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -60,7 +60,7 @@
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de lavage aujourd'hui</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{dashbord.nbWashDay}}</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{dashboard.nbWashDay}}</div>
                         </div>
                       </div>
                     </div>
@@ -79,7 +79,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Nombre de lavage cette semaine</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashbord.nbWashDay}}</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashboard.nbWashDay}}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -122,25 +122,18 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Historique</h6>
-                 
+                  <h6 class="m-0 font-weight-bold text-primary">Commandes à venir</h6>
+
+                  
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+
+                  <div v-for="(elem,key) in aVenir" :key="key">
+                    <Card :status="elem.status"/>
                   </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                  </div>
+                
+                  
                 </div>
               </div>
             </div>
@@ -278,6 +271,7 @@ import MainChartExample from '../charts/MainChartExample'
 import CChartBarExample from '../charts/CChartBarExample'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import WidgetsBrand from '../widgets/WidgetsBrand'
+import Card from './card'
 
 import Graph from './graph'
 
@@ -290,73 +284,16 @@ export default {
     MainChartExample,
     WidgetsDropdown,
     WidgetsBrand,
-    CChartBarExample
+    CChartBarExample,
+    Card
 
   },
   data () {
     return {
-      dashbord: [],
+      dashboard: [],
       clientId: 1,
       nombreDéclenchement: [],
-      selected: 'Month',
-      tableItems: [
-        {
-          avatar: { url: 'img/avatars/1.jpg', status: 'success' },
-          user: { name: 'Yiorgos Avraamu', new: true, registered: 'Jan 1, 2015' },
-          country: { name: 'USA', flag: 'cif-us' },
-          usage: { value: 50, period: 'Jun 11, 2015 - Jul 10, 2015' },
-          payment: { name: 'Mastercard', icon: 'cib-cc-mastercard' },
-          activity: '10 sec ago'
-        },
-        {
-          avatar: { url: 'img/avatars/2.jpg', status: 'danger' },
-          user: { name: 'Avram Tarasios', new: false, registered: 'Jan 1, 2015' },
-          country: { name: 'Brazil', flag: 'cif-br' },
-          usage: { value: 22, period: 'Jun 11, 2015 - Jul 10, 2015' },
-          payment: { name: 'Visa', icon: 'cib-cc-visa' },
-          activity: '5 minutes ago'
-        },
-        {
-          avatar: { url: 'img/avatars/3.jpg', status: 'warning' },
-          user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2015' },
-          country: { name: 'India', flag: 'cif-in' },
-          usage: { value: 74, period: 'Jun 11, 2015 - Jul 10, 2015' },
-          payment: { name: 'Stripe', icon: 'cib-stripe' },
-          activity: '1 hour ago'
-        },
-        {
-          avatar: { url: 'img/avatars/4.jpg', status: '' },
-          user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2015' },
-          country: { name: 'France', flag: 'cif-fr' },
-          usage: { value: 98, period: 'Jun 11, 2015 - Jul 10, 2015' },
-          payment: { name: 'PayPal', icon: 'cib-paypal' },
-          activity: 'Last month'
-        },
-        {
-          avatar: { url: 'img/avatars/5.jpg', status: 'success' },
-          user: { name: 'Agapetus Tadeáš', new: true, registered: 'Jan 1, 2015' },
-          country: { name: 'Spain', flag: 'cif-es' },
-          usage: { value: 22, period: 'Jun 11, 2015 - Jul 10, 2015' },
-          payment: { name: 'Google Wallet', icon: 'cib-google-pay' },
-          activity: 'Last week'
-        },
-        {
-          avatar: { url: 'img/avatars/6.jpg', status: 'danger' },
-          user: { name: 'Friderik Dávid', new: true, registered: 'Jan 1, 2015' },
-          country: { name: 'Poland', flag: 'cif-pl' },
-          usage: { value: 43, period: 'Jun 11, 2015 - Jul 10, 2015' },
-          payment: { name: 'Amex', icon: 'cib-cc-amex' },
-          activity: 'Last week'
-        }
-      ],
-      tableFields: [
-        { key: 'avatar', label: '', _classes: 'text-center' },
-        { key: 'user' },
-        { key: 'country', _classes: 'text-center' },
-        { key: 'usage' },
-        { key: 'payment', label: 'Payment method', _classes: 'text-center' },
-        { key: 'activity' },
-      ]
+      aVenir:[]
     }
   },
   methods: {
@@ -374,11 +311,13 @@ export default {
       return $color
     }
   },
-  mounted() {
+  created() {
     axios.get("/api/dashbord/getDataForDashbord/" + this.clientId).then(res => {
-      this.dashbord = res.data;
-      console.log(this.dashbord);
-      this.nombreDéclenchement = this.dashbord.futurCommandes.length
+      this.dashboard = res.data;
+      console.log(this.dashboard);
+      this.nombreDéclenchement = this.dashboard.futurCommandes.length
+      this.aVenir = this.dashboard.futurCommandes
+      console.log('test',this.aVenir)
     });
   }
 }
