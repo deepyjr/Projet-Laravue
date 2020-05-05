@@ -71,7 +71,7 @@ class commandeController extends Controller
         $commande->save();
 
         $nofificationController = new notificationController();
-        $nofificationController->store(request('objetId'), 3);
+        $nofificationController->store(request('objetId'), request('clientId'));
         return response(200);
     }
 

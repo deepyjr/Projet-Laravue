@@ -53,6 +53,8 @@ Route::resource('sites', 'siteController');
 Route::get('objets/indexBySiteId/{siteId}', 'objetController@indexBySiteId')->name('objet.indexBySiteId');
 Route::resource('objets', 'objetController');
 Route::resource('robots', 'robotController');
+Route::post('notifications/userSawNotifications/{notificationId}', 'notificationController@userSawNotification')->name('notification.userSawNotification');
+Route::get('notifications/indexNotificationByClientId/{clientId}', 'notificationController@indexNotificationByClientId')->name('notification.indexNotificationByClientId');
 Route::resource('notifications', 'notificationController');
 Route::resource('produits_menagers', 'produits_menagerController');
 Route::resource('outils_menagers', 'outils_menagerController');

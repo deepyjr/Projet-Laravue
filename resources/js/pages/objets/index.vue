@@ -94,7 +94,7 @@ export default {
     laverObjet(objet) {
       axios
         .post("/api/commandes", {
-          clientId: 3,
+          clientId: this.clientId,
           objetId: objet.id,
           date_debut: this.getTheCurrentDate(),
           status: "Debut"

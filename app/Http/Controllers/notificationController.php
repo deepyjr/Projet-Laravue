@@ -10,6 +10,27 @@ use App\site;
 
 class notificationController extends Controller
 {
+
+    /**
+     * 
+     */
+    public function indexNotificationByClientId($clientId)
+    {
+        $sql = "SELECT * FROM notifications WHERE vu = 0 AND clientId = $clientId ORDER BY id DESC LIMIT 3";
+        $notifications = DB::select($sql);
+        return response()->json($notifications);
+    }
+
+    /**
+     * 
+     */
+    public function userSawNotification($notificationId)
+    {
+        $notification = Notification::find($notificationId);
+        $notification->vu = true;
+        $notification->save();
+        return response(200);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -46,6 +67,7 @@ class notificationController extends Controller
         $notification->clientId = $clientId;
         $notification->description = "Le lavage $nom_lavage a été commandé ";
         $notification->type = "Lavage";
+        $notification->vu = false;
         $notification->date = date("Y-m-d H:i:s");
         $notification->save();
     }
