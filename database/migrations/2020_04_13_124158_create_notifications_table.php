@@ -19,6 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->longText('description');
             $table->string('type');
             $table->dateTime('date', 0);
+            $table->boolean('vu');
             $table->timestamps();
         });
     }
