@@ -22,7 +22,6 @@
           <!-- Authenticated -->
           <div v-if="user" class="mt-2">
             <router-link class="mr-3 mt-4 navbar-item" :to="{ name: 'campus' }">{{ $t('Campus') }}</router-link>
-
             <router-link :to="{ name: 'dashboard' }" class="mr-3 mt-4 navbar-item" active-class="active">
               {{ $t('Dashboard') }}
             </router-link>
@@ -53,7 +52,14 @@
                 {{ $t('logout') }}
               </a>
             </div>
+             
           </li>
+          <div v-if="user">
+            <CIcon name="cilBell" class="cloche_notif"/>
+          </div>
+          
+
+       
           <!-- Guest -->
           <template v-else>
             <li class="nav-item">
@@ -76,6 +82,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { library, icon } from '@fortawesome/fontawesome-svg-core'
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import LocaleDropdown from './LocaleDropdown'
 
 export default {
@@ -84,7 +92,9 @@ export default {
   },
 
   data: () => ({
-    appName: window.config.appName
+    appName: window.config.appName,
+    notif : [],
+    clientId: 1
   }),
 
   computed: mapGetters({
@@ -98,6 +108,12 @@ export default {
 
       // Redirect to login.
       this.$router.push({ name: 'login' })
+    },
+
+    checkNotif () {
+      axios.get("/api/dashbord/getDataForDashbord/" + this.clientId).then(res => {
+      console.log('test',this.notif)
+    });
     }
   }
 }
@@ -114,5 +130,8 @@ export default {
 }
 .logo-nav-bar{
   height: 70px;
+}
+.cloche_notif{
+  height: 20px;
 }
 </style>
