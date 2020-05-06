@@ -134,7 +134,7 @@ export default {
     },
 
     checkNotif () {
-      axios.get("api/notifications/indexNotificationByClientId/" + this.clientId).then(res => {
+      axios.get("/api/notifications/indexNotificationByClientId/" + this.clientId).then(res => {
         // if(res.data.length() > 0 ){
 
         // }
