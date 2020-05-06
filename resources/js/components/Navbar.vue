@@ -54,9 +54,28 @@
             </div>
              
           </li>
-          <div v-if="user">
-            <CIcon name="cilBell" class="cloche_notif"/>
-          </div>
+
+          <li v-if="user" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark"
+               href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            >
+              <CIcon name="cilBell" class="cloche_notif nav-item dropdown"/>
+            </a>
+            <div class="dropdown-menu">
+              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
+                <fa icon="cog" fixed-width />
+                {{ $t('settings') }}
+              </router-link>
+
+              <div class="dropdown-divider" />
+              <a href="#" class="dropdown-item pl-3" @click.prevent="logout">
+                <fa icon="sign-out-alt" fixed-width />
+                {{ $t('logout') }}
+              </a>
+            </div>
+             
+          </li>
+
           
 
        
@@ -98,8 +117,12 @@ export default {
   }),
 
   computed: mapGetters({
-    user: 'auth/user'
+    user: 'auth/user',
+    
   }),
+  mounted(){
+    this.checkNotif()
+  },
 
   methods: {
     async logout () {
@@ -111,7 +134,11 @@ export default {
     },
 
     checkNotif () {
-      axios.get("/api/dashbord/getDataForDashbord/" + this.clientId).then(res => {
+      axios.get("api/notifications/indexNotificationByClientId/" + this.clientId).then(res => {
+        // if(res.data.length() > 0 ){
+
+        // }
+        this.notif = res.data
       console.log('test',this.notif)
     });
     }
