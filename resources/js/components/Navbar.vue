@@ -56,22 +56,15 @@
           </li>
 
           <li v-if="user" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark"
+            <a class="nav-link text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
               <CIcon name="cilBell" class="cloche_notif nav-item dropdown"/>
             </a>
-            <div class="dropdown-menu">
-              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
-                <fa icon="cog" fixed-width />
-                {{ $t('settings') }}
-              </router-link>
-
-              <div class="dropdown-divider" />
-              <a href="#" class="dropdown-item pl-3" @click.prevent="logout">
-                <fa icon="sign-out-alt" fixed-width />
-                {{ $t('logout') }}
-              </a>
+            <div class="dropdown-menu item-drop" v-for="(elem,key) in notif" :key="key">
+              <p class="notif pl-2 pr-2">{{elem.description}} à {{elem.created_at}} pour le {{elem.date}} {{key}}</p>
+              <div class="dropdown-divider"/>
+            
             </div>
              
           </li>
@@ -161,4 +154,8 @@ export default {
 .cloche_notif{
   height: 20px;
 }
+.item-drop{
+  min-width: 350px;
+}
+
 </style>
