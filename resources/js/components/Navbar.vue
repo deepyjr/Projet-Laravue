@@ -22,7 +22,6 @@
           <!-- Authenticated -->
           <div v-if="user" class="mt-2">
             <router-link class="mr-3 mt-4 navbar-item" :to="{ name: 'campus' }">{{ $t('Campus') }}</router-link>
-
             <router-link :to="{ name: 'dashboard' }" class="mr-3 mt-4 navbar-item" active-class="active">
               {{ $t('Dashboard') }}
             </router-link>
@@ -53,7 +52,33 @@
                 {{ $t('logout') }}
               </a>
             </div>
+             
           </li>
+
+          <li v-if="user" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark"
+               href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            >
+              <CIcon name="cilBell" class="cloche_notif nav-item dropdown"/>
+            </a>
+            <div class="dropdown-menu">
+              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
+                <fa icon="cog" fixed-width />
+                {{ $t('settings') }}
+              </router-link>
+
+              <div class="dropdown-divider" />
+              <a href="#" class="dropdown-item pl-3" @click.prevent="logout">
+                <fa icon="sign-out-alt" fixed-width />
+                {{ $t('logout') }}
+              </a>
+            </div>
+             
+          </li>
+
+          
+
+       
           <!-- Guest -->
           <template v-else>
             <li class="nav-item">
@@ -76,6 +101,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { library, icon } from '@fortawesome/fontawesome-svg-core'
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import LocaleDropdown from './LocaleDropdown'
 
 export default {
@@ -84,12 +111,18 @@ export default {
   },
 
   data: () => ({
-    appName: window.config.appName
+    appName: window.config.appName,
+    notif : [],
+    clientId: 1
   }),
 
   computed: mapGetters({
-    user: 'auth/user'
+    user: 'auth/user',
+    
   }),
+  mounted(){
+    this.checkNotif()
+  },
 
   methods: {
     async logout () {
@@ -98,6 +131,16 @@ export default {
 
       // Redirect to login.
       this.$router.push({ name: 'login' })
+    },
+
+    checkNotif () {
+      axios.get("/api/notifications/indexNotificationByClientId/" + this.clientId).then(res => {
+        // if(res.data.length() > 0 ){
+
+        // }
+        this.notif = res.data
+      console.log('test',this.notif)
+    });
     }
   }
 }
@@ -114,5 +157,8 @@ export default {
 }
 .logo-nav-bar{
   height: 70px;
+}
+.cloche_notif{
+  height: 20px;
 }
 </style>
