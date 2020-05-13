@@ -135,6 +135,7 @@ export default {
       // Redirect to login.
       this.$router.push({ name: 'login' })
     },
+    
     checkId(key){
       // console.log(key);
       // console.log(this.notif[key].id);
@@ -142,6 +143,7 @@ export default {
       this.checkNotif();
       // console.log(this.notif)
     },
+
     checkNotif () {
       axios.get("/api/notifications/indexNotificationByClientId/" + this.clientId).then(res => {
 
@@ -149,6 +151,7 @@ export default {
       console.log('test',this.notif)
       });
     },
+
     deleteNotif (idNotif) {
       axios.post("/api/notifications/userSawNotifications/" + idNotif)
       .then(function (response) {
