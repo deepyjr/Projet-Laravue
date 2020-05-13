@@ -40,6 +40,7 @@
               <img :src="user.photo_url" class="rounded-circle profile-photo mr-1">
               {{ user.name }}
             </a>
+
             <div class="dropdown-menu">
               <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
                 <fa icon="cog" fixed-width />
@@ -59,14 +60,21 @@
             <a class="nav-link text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
+            <div >
               <CIcon name="cilBell" class="cloche_notif nav-item dropdown"/>
-            </a>
-            <div class="dropdown-menu item-drop" v-for="(elem,key) in notif" :key="key">
-              <p class="notif pl-2 pr-2">{{elem.description}} à {{elem.created_at}} pour le {{elem.date}} {{key}}</p>
-              <div class="dropdown-divider"/>
-            
             </div>
-             
+            </a>
+
+            <div class="dropdown-menu item-drop" >
+                <p class="notif pl-2 pr-2 container-notif" v-for="(elem,key) in notif" :key="key">{{elem.description}} à {{elem.created_at}} pour le {{elem.date}} {{key}}
+                  <a href="#" @click="checkId(key)">
+                    <CIcon name="cilCheck" class="check_notif"/> 
+                  </a>
+                </p>
+                
+                
+            </div>
+
           </li>
 
           
@@ -106,6 +114,7 @@ export default {
   data: () => ({
     appName: window.config.appName,
     notif : [],
+    notifPresence: 0,
     clientId: 1
   }),
 
@@ -113,9 +122,10 @@ export default {
     user: 'auth/user',
     
   }),
-  mounted(){
+  created(){
     this.checkNotif()
   },
+
 
   methods: {
     async logout () {
@@ -125,15 +135,28 @@ export default {
       // Redirect to login.
       this.$router.push({ name: 'login' })
     },
-
+    checkId(key){
+      // console.log(key);
+      // console.log(this.notif[key].id);
+      this.deleteNotif(this.notif[key].id);
+      this.checkNotif();
+      // console.log(this.notif)
+    },
     checkNotif () {
       axios.get("/api/notifications/indexNotificationByClientId/" + this.clientId).then(res => {
-        // if(res.data.length() > 0 ){
 
-        // }
-        this.notif = res.data
+        this.notif = res.data;
       console.log('test',this.notif)
-    });
+      });
+    },
+    deleteNotif (idNotif) {
+      axios.post("/api/notifications/userSawNotifications/" + idNotif)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
 }
@@ -157,5 +180,11 @@ export default {
 .item-drop{
   min-width: 350px;
 }
-
+.container-notif{
+  display: flex;
+}
+.check_notif{
+  height: 20px !important;
+  margin-right: 10px;
+}
 </style>
