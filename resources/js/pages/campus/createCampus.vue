@@ -1,9 +1,6 @@
 <template>
   <div class="card" :title="$t('IndexCampus')">
-    <div>
-      <router-link :to="{ name: 'campus' }" class="btn btn-primary">Retour</router-link>
-    </div>
-    <div class="card" style="width: 18rem;">
+    <div class="container mt-5 mb-5">
       <form @submit.prevent="submitForm">
         <div class="form-group">
           <label for="exampleInputEmail1">Nom du campus</label>
@@ -28,12 +25,15 @@
             placeholder="Adresse du campus"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Créer le nouveau campus</button>
+          <div class="d-flex justify-content-end  mt-2">
+            <router-link :to="{ name: 'sites' , params: { id: campusId }}" class="btn btn-primary">Retour</router-link>
+            <button type="submit" class="btn btn-primary ml-3">Créer le nouveau campus</button>
+          </div>
       </form>
-      <p>{{ campus }}</p>
     </div>
   </div>
 </template>
+
 
 <script>
 export default {

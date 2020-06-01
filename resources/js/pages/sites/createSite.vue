@@ -1,27 +1,30 @@
 <template>
+
   <div class="card" :title="$t('createSite')">
-    <div>
-      <router-link :to="{ name: 'sites' , params: { id: campusId }}" class="btn btn-primary">Retour</router-link>
+      <div class="container mt-5 mb-5">
+        <form @submit.prevent="submitForm">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nom du site</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              v-model="name"
+              aria-describedby="emailHelp"
+              placeholder="Nom du sites"
+            />
+          </div>
+          <div class="d-flex justify-content-end  mt-2">
+            <router-link :to="{ name: 'sites' , params: { id: campusId }}" class="btn btn-primary">Retour</router-link>
+            <button type="submit" class="btn btn-primary ml-3">Créer le nouveau site</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="card" style="width: 18rem;">
-      <form @submit.prevent="submitForm">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Nom du site</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            v-model="name"
-            aria-describedby="emailHelp"
-            placeholder="Nom du sites"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Créer le nouveau site</button>
-      </form>
-    </div>
-  </div>
+
 </template>
+
 
 <script>
 export default {
@@ -53,3 +56,10 @@ export default {
   }
 };
 </script>
+
+<style  scoped>
+.textRetour{
+  text-decoration: none !important;
+  color: #3497DC !important;
+}
+</style>
