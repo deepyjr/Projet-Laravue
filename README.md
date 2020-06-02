@@ -1,4 +1,4 @@
-
+Start from LARAVEL / VUE SPA FROM  
 #Installation  
 composer create-project --prefer-dist cretueusebiu/laravel-vue-spa  
 Edit .env and set your database connection details  
